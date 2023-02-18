@@ -1,5 +1,5 @@
 #定义变量
-src=$(wildcard ./font/*.c ./display/*.c ./unittest/font/*.c) # 获取指定路径下的文件
+src=$(wildcard ./font/*.c ./input/*.c ./display/*.c ./ui/*.c ./unittest/ui/*.c) # 获取指定路径下的文件
 objs=$(patsubst %.c, %.o, $(src)) # 将获取的文件名.c替换为.o文件
 # 开发框架头文件路径。
 PUBINCL = -I $(shell pwd)/include

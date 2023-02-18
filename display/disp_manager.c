@@ -138,11 +138,12 @@ void DrawFontBitMap(PFontBitMap ptFontBitMap, unsigned int dwColor)
 	int y = ptFontBitMap->tRegion.iLeftUpY;
     int x_max = x + ptFontBitMap->tRegion.iWidth;
     int y_max = y + ptFontBitMap->tRegion.iHeigh;
-	int width = ptFontBitMap->tRegion.iWidth;
-	unsigned char *buffer = ptFontBitMap->pucBuffer;
+	int width = ptFontBitMap->tRegion.iWidth; // 位宽
+	unsigned char *buffer = ptFontBitMap->pucBuffer; // 内存buffer
 
     //printf("x = %d, y = %d\n", x, y);
 
+	// 遍历每行每列，并同时遍历buffer中的每行每列，绘制buffer中对应的有值的点
     for ( j = y, q = 0; j < y_max; j++, q++ )
     {
         for ( i = x, p = 0; i < x_max; i++, p++ )
@@ -159,5 +160,66 @@ void DrawFontBitMap(PFontBitMap ptFontBitMap, unsigned int dwColor)
     }
 	
 }
+
+// 7.绘制一个区域
+void DrawRegion(PRegion ptRegion, unsigned int dwColor)
+{
+	int x = ptRegion->iLeftUpX;
+	int y = ptRegion->iLeftUpY;
+	int width = ptRegion->iWidth;
+	int heigh = ptRegion->iHeigh;
+
+	int i,j;
+
+	for (j = y; j < y + heigh; j++)
+	{
+		for (i = x; i < x + width; i++)
+			PutPixel(i, j, dwColor);// 绘制每行每列的点
+	}
+}
+
+// 8. 绘制居中文字
+void DrawTextInRegionCentral(char *name, PRegion ptRegion, unsigned int dwColor)
+{
+	// 1.计算文字大小
+	int n = strlen(name);  // 字符数量
+	int iFontSize = ptRegion->iWidth / n / 2; // 文字大小
+	FontBitMap tFontBitMap;// 文字数据结构
+
+	int iOriginX, iOriginY;// pen起始基点
+	int i = 0;
+	int error;
+
+	if (iFontSize > ptRegion->iHeigh)
+		iFontSize =  ptRegion->iHeigh; // 防止文字高度越界
+
+	// 2.计算起始坐标
+	iOriginX = (ptRegion->iWidth - n * iFontSize)/2 + ptRegion->iLeftUpX;
+	iOriginY = (ptRegion->iHeigh - iFontSize)/2 + iFontSize + ptRegion->iLeftUpY;
+	// 设备文字大小
+	SetFontSize(iFontSize); 
+
+	while (name[i]) // 绘制给出的每个字符
+	{
+		/* get bitmap */
+		tFontBitMap.iCurOriginX = iOriginX;
+		tFontBitMap.iCurOriginY = iOriginY;
+		error = GetFontBitMap(name[i], &tFontBitMap);
+		if (error)
+		{
+			printf("SelectAndInitFont err\n");
+			return;
+		}
+
+		/* draw on buffer */		
+		DrawFontBitMap(&tFontBitMap, dwColor);		
+
+		iOriginX = tFontBitMap.iNextOriginX;
+		iOriginY = tFontBitMap.iNextOriginY;	
+		i++;
+	}
+	
+}
+
 
 

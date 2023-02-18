@@ -48,7 +48,10 @@ int FlushDisplayRegion(PRegion ptRegion, PDispBuff ptDispBuff);
 PDispBuff GetDisplayBuffer(void);
 // 绘制位图-用到了PFontBitMap结构体 #include <font_manager.h>
 void DrawFontBitMap(PFontBitMap ptFontBitMap, unsigned int dwColor);
-
+// 绘制一个区域
+void DrawRegion(PRegion ptRegion, unsigned int dwColor);
+// 8. 绘制居中文字
+void DrawTextInRegionCentral(char *name, PRegion ptRegion, unsigned int dwColor);
 #endif
 
 
