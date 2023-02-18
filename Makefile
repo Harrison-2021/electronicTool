@@ -1,10 +1,10 @@
 #定义变量
-src=$(wildcard ./input/*.c ./unittest/input/*.c) # 获取指定路径下的文件
+src=$(wildcard ./font/*.c ./display/*.c ./unittest/font/*.c) # 获取指定路径下的文件
 objs=$(patsubst %.c, %.o, $(src)) # 将获取的文件名.c替换为.o文件
 # 开发框架头文件路径。
 PUBINCL = -I $(shell pwd)/include
 # 链接的其他库
-LDFLAGS = -lts -lpthread
+LDFLAGS = -lts -lpthread -lfreetype
 # 交叉编译
 ARMBUILD = arm-buildroot-linux-gnueabihf-gcc
 target=app # 生成的目标文件

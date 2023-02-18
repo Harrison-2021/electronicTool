@@ -1,18 +1,17 @@
 #ifndef _DISP_MANAGER_H
 #define _DISP_MANAGER_H
 
-// 对NULL的定义
-#ifndef NULL
-#define NULL (void *)0
-#endif
+#include <common.h>
+#include <font_manager.h>
 
-// 表示区域的结构体
-typedef struct Region { 
+// 表示区域的结构体-放到commen.h头文件中，很多源文件都需要用到的信息
+/*typedef struct Region { 
 	int iLeftUpX;
 	int iLeftUpY;
 	int iWidth;
 	int iHeigh;
 }Region, *PRegion;// 结构体用指针表示
+*/
 
 // 定义映射内存的buffer结构体
 typedef struct DispBuff {
@@ -47,7 +46,8 @@ int PutPixel(int x, int y, unsigned int dwColor);
 int FlushDisplayRegion(PRegion ptRegion, PDispBuff ptDispBuff);
 // 获取底层映射的的内存地址
 PDispBuff GetDisplayBuffer(void);
-
+// 绘制位图-用到了PFontBitMap结构体 #include <font_manager.h>
+void DrawFontBitMap(PFontBitMap ptFontBitMap, unsigned int dwColor);
 
 #endif
 
