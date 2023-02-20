@@ -14,8 +14,8 @@ static int fd_fb;
 static struct fb_var_screeninfo var;	/* Current var */
 static int screen_size;
 static unsigned char *fb_base;	// 在内存中映射buffer的地址起始位置
-static unsigned int line_width; // 行宽
-static unsigned int pixel_width;// 像素位宽
+static unsigned int line_width;
+static unsigned int pixel_width;
 
 // 初始化设备信息函数
 static int FbDeviceInit(void)
@@ -36,11 +36,10 @@ static int FbDeviceInit(void)
 		return -1;
 	}
 
-	// 3.映射 Framebuffer-即将单片机设备内存映射到linux操作系统的一块内存上-找到起始地址即可
-	line_width  = var.xres * var.bits_per_pixel / 8; // 内存以byte字节为单位，1字节为8bit
+	// 3.映射 Framebuffer
+	line_width  = var.xres * var.bits_per_pixel / 8;
 	pixel_width = var.bits_per_pixel / 8;
-	screen_size = var.xres * var.yres * var.bits_per_pixel / 8; // 整个LCD屏幕对应的buffer内存大小
-	// 将LCD屏像素映射到linux的framebuffer中，返回内存起始地址，今后LCD控制器可以读取buffer像素颜色
+	screen_size = var.xres * var.yres * var.bits_per_pixel / 8; // 整个framebuffer大小	
 	// PROT_READ |PROT_WRITE 表示该区域可读、可写； MAP_SHARED 表示该区域是共享的
 	fb_base = (unsigned char *)mmap(NULL , screen_size, PROT_READ | PROT_WRITE, MAP_SHARED, fd_fb, 0);
 	if (fb_base == (unsigned char *)-1)

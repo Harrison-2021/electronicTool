@@ -48,11 +48,4 @@ int GetFontBitMap(unsigned int dwCode, PFontBitMap ptFontBitMap)
 	return g_ptDefaulFontOpr->GetFontBitMap(dwCode, ptFontBitMap);
 }
 
-/* 获取字体外框*/
-int GetStringRegionCar(char *str, PRegionCartesian ptRegionCar)
-{
-	return g_ptDefaulFontOpr->GetStringRegionCar(str, ptRegionCar);
-}
-
-
 

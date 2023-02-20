@@ -13,8 +13,8 @@
 
 int main(int argc, char **argv)
 {
-	PagesInit(); // 注册
-	selectPage("main")->Run(NULL); // 运行主页面
+	PagesRegister(); // 注册
+	Page("main")->Run(NULL); // 运行主页面
 	return 0;	
 }
 

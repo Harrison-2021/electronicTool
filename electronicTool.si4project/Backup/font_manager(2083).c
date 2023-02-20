@@ -12,7 +12,7 @@ void RegisterFont(PFontOpr ptFontOpr)
 	g_ptFonts = ptFontOpr;
 }
 /* 初始化注册操作*/
-void FontsInit(void)
+void FontsRegister(void)
 {
 	extern void FreetypeRegister(void);
 	FreetypeRegister();
@@ -47,12 +47,5 @@ int GetFontBitMap(unsigned int dwCode, PFontBitMap ptFontBitMap)
 {
 	return g_ptDefaulFontOpr->GetFontBitMap(dwCode, ptFontBitMap);
 }
-
-/* 获取字体外框*/
-int GetStringRegionCar(char *str, PRegionCartesian ptRegionCar)
-{
-	return g_ptDefaulFontOpr->GetStringRegionCar(str, ptRegionCar);
-}
-
 
 

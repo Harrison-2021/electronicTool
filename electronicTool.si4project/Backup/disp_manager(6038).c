@@ -80,12 +80,11 @@ PDispBuff GetDisplayBuffer(void)
 // 4.绘制像素的基本操作函数，中间层提供，用户层可以调用使用
 int PutPixel(int x, int y, unsigned int dwColor) // 描点的位置，颜色，默认是32位RGB888格式
 {
-	// 1.计算像素对应的linux的framebuffer地址：起始地址加偏移量：内存地址连续
+	// 计算像素对应的framebuffer地址
 	unsigned char *pen_8 =(unsigned char *)(g_tDispBuff.buff+y*line_width+x*pixel_width);
 	unsigned short *pen_16;	
 	unsigned int *pen_32;	
 
-	// 2.在对应像素地址上，添加颜色-不用的bbp格式，要进行转换
 	unsigned int red, green, blue;	
 
 	pen_16 = (unsigned short *)pen_8;
@@ -135,7 +134,6 @@ int FlushDisplayRegion(PRegion ptRegion, PDispBuff ptDispBuff)
 void DrawFontBitMap(PFontBitMap ptFontBitMap, unsigned int dwColor)
 {
     int i, j, p, q;
-	// 寻找LCD显示的位置信息
 	int x = ptFontBitMap->tRegion.iLeftUpX;
 	int y = ptFontBitMap->tRegion.iLeftUpY;
     int x_max = x + ptFontBitMap->tRegion.iWidth;
@@ -183,23 +181,25 @@ void DrawRegion(PRegion ptRegion, unsigned int dwColor)
 // 8. 绘制居中文字
 void DrawTextInRegionCentral(char *name, PRegion ptRegion, unsigned int dwColor)
 {
-	FontBitMap tFontBitMap;
-	RegionCartesian tRegionCar;
+	// 1.计算文字大小
+	int n = strlen(name);  // 字符数量
+	int iFontSize = ptRegion->iWidth / n / 2; // 文字大小
+	FontBitMap tFontBitMap;// 文字数据结构
 
-	int iOriginX, iOriginY;
+	int iOriginX, iOriginY;// pen起始基点
 	int i = 0;
 	int error;
 
-	/* 计算字符串的外框 */
-	GetStringRegionCar(name, &tRegionCar);
+	if (iFontSize > ptRegion->iHeigh)
+		iFontSize =  ptRegion->iHeigh; // 防止文字高度越界
 
-	/* 算出第一个字符的origin */
-	iOriginX = ptRegion->iLeftUpX + (ptRegion->iWidth - tRegionCar.iWidth)/2 - tRegionCar.iLeftUpX;
-	iOriginY = ptRegion->iLeftUpY + (ptRegion->iHeigh - tRegionCar.iHeigh)/2 + tRegionCar.iLeftUpY;
+	// 2.计算起始坐标
+	iOriginX = (ptRegion->iWidth - n * iFontSize)/2 + ptRegion->iLeftUpX;
+	iOriginY = (ptRegion->iHeigh - iFontSize)/2 + iFontSize + ptRegion->iLeftUpY;
+	// 设备文字大小
+	SetFontSize(iFontSize); 
 
-
-	/* 逐个绘制 */
-	while (name[i])
+	while (name[i]) // 绘制给出的每个字符
 	{
 		/* get bitmap */
 		tFontBitMap.iCurOriginX = iOriginX;
@@ -212,10 +212,9 @@ void DrawTextInRegionCentral(char *name, PRegion ptRegion, unsigned int dwColor)
 		}
 
 		/* draw on buffer */		
-		DrawFontBitMap(&tFontBitMap, dwColor);	
-		
-		// 进行下个按钮处理
-		iOriginX = tFontBitMap.iNextOriginX; // 更新字符基点坐标iNextOriginX从GetFontBitMap中获取
+		DrawFontBitMap(&tFontBitMap, dwColor);		
+
+		iOriginX = tFontBitMap.iNextOriginX;
 		iOriginY = tFontBitMap.iNextOriginY;	
 		i++;
 	}

@@ -9,7 +9,6 @@ static int DefaultOnDraw(struct Button *ptButton, PDispBuff ptDispBuff)
 	DrawRegion(&ptButton->tRegion, BUTTON_DEFAULT_COLOR);
 
 	/* 居中写文字 */
-	SetFontSize(ptButton->iFontSize); // 每次写之前，设置字体大小
 	DrawTextInRegionCentral(ptButton->name, &ptButton->tRegion, BUTTON_TEXT_COLOR);
 
 	/* flush to lcd/web */

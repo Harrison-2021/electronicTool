@@ -12,7 +12,7 @@ typedef struct PageAction {
 void PageRegister(PPageAction ptPageAction);
 void PagesInit(void);
 // 获取页面
-PPageAction selectPage(char *name);
+PPageAction Page(char *name);
 
 #endif
 

@@ -35,9 +35,6 @@ int SelectAndInitFont(char *aFontOprName, char *aFontFileName);
 int SetFontSize(int iFontSize);
 /* 获取文件信息 */
 int GetFontBitMap(unsigned int dwCode, PFontBitMap ptFontBitMap);
-/* 获取字符边框*/
-int GetStringRegionCar(char *str, PRegionCartesian ptRegionCar);
-
 
 
 #endif

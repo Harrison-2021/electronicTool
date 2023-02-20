@@ -1,0 +1,4 @@
+---- SetFontSize Matches (3 in 3 files) ----
+SetFontSize in font_manager.c (font) : 	return g_ptDefaulFontOpr->SetFontSize(iFontSize);
+FontOpr in font_manager.h (include) : 	int (*SetFontSize)(int iFontSize);// 设置字体大小，不一定能设置，需要有返回值
+g_tFreetypeOpr in freetype.c (font) : 	.SetFontSize   = FreeTypeSetFontSize,

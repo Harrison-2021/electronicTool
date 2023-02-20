@@ -81,6 +81,7 @@ static int MainPageOnPressed(struct Button *ptButton, PDispBuff ptDispBuff, PInp
 
 	/* flush to lcd/web */
 	FlushDisplayRegion(&ptButton->tRegion, ptDispBuff);
+	return 0;
 
 	/* 执行command */
 	ptItemCfg = GetItemCfgByName(ptButton->name);
@@ -91,7 +92,6 @@ static int MainPageOnPressed(struct Button *ptButton, PDispBuff ptDispBuff, PInp
 		// 调用命令
 		system(command);
 	}
-	return 0;
 	
 }
 

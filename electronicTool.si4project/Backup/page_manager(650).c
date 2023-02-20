@@ -6,7 +6,7 @@
 static PPageAction g_ptPages = NULL;
 
 // 1. 注册页面
-void PagesInit(void)
+void PagesRegister(void)
 {
 	extern void MainPageRegister(void);
 	MainPageRegister();
@@ -19,7 +19,7 @@ void PageRegister(PPageAction ptPageAction)
 }
 
 // 寻找并获得一个页面
-PPageAction selectPage(char *name)
+PPageAction Page(char *name)
 {
 	PPageAction ptTmp = g_ptPages;
 

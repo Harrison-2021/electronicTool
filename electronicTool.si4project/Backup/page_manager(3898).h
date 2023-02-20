@@ -10,9 +10,9 @@ typedef struct PageAction {
 
 // 注册页面操作和注册方法
 void PageRegister(PPageAction ptPageAction);
-void PagesInit(void);
+void PagesRegister(void);
 // 获取页面
-PPageAction selectPage(char *name);
+PPageAction Page(char *name);
 
 #endif
 
