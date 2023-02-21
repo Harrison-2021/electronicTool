@@ -27,7 +27,11 @@
 ### 页面管理系统界面
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/844742a5a33d45f7bd6ebf5d52de7355.png)
 ## 3.2 业务系统综合demo
+![在这里插入图片描述](https://img-blog.csdnimg.cn/e33f1194abf0477389774227ba36e079.gif)
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/0c0b5c5c1fee4342a021c6a91a129368.png)
-
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/e1886e4c920b4f468d98a939f50d2eb4.jpeg)
+
+
+https://user-images.githubusercontent.com/77105239/220292428-65b6fb60-fbe0-496e-b933-b7039706c602.mp4
+
 
