@@ -23,7 +23,7 @@
 - 网络输入
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/bfe2be156d564c118429ec8565e616a5.png)
 ### ui按钮设计
-![在这里插入图片描述](https://img-blog.csdnimg.cn/b41f266fd663479a948caffc2ad35a44.png)
+![请添加图片描述](https://img-blog.csdnimg.cn/94c6310b0c634704a3142a07c1f33f87.gif)
 ### 页面管理系统界面
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/844742a5a33d45f7bd6ebf5d52de7355.png)
 ## 3.2 业务系统综合demo
